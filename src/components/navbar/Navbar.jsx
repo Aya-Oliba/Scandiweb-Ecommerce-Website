@@ -2,19 +2,49 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import './navbar.scss'
 import shoppingBag from '../../logo.png';
-import emptyCart from '../../Empty-Cart.png'
+import emptyCart from '../../Empty-Cart.png';
+import { connect } from 'react-redux';
+import { changeCurrency } from '../../redux/currencySlice';
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+
+const mapStateToProps = (state) => {
+    return {
+        currency: state.currencyStore.currency
+    }
+};
+
+const mapDispatchToProps = { changeCurrency };
 
 class Navbar extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
-            selectedCurrency: "$"
+            selectedCurrency: "$",
+            currenciesList: []
         }
         this.handleChange = this.handleChange.bind(this)
     }
+    componentDidMount(){
+        const client = new ApolloClient({
+            uri: "http://localhost:4000/",
+            cache: new InMemoryCache(),
+        });
+        client
+            .query({
+                query: gql`
+                    query {
+                        currencies {
+                            label
+                            symbol
+                        }
+                    }
+                `,
+            }).then((data) => this.setState({currenciesList :data?.data?.currencies}))
+        }
+    
     handleChange(e){
-        console.log(e.target.value);
         this.setState({selectedCurrency: e.target.value})
+        this.props.changeCurrency(e.target.value)
     }
     render() {
         return (
@@ -29,10 +59,13 @@ class Navbar extends Component {
                 </div>
                 <div className='right'>
                     <p>{this.state.selectedCurrency}</p>
-                    <select name="" id="" onChange={this.handleChange}>
-                        <option value="$">$USD</option>
-                        <option value="&euro;">&euro;EUR</option>
-                        <option value="&#165;">&#165;Jpy</option>
+                    <select name="currencySelect" onChange={this.handleChange}>
+                        {this.state.currenciesList.map((currency,i)=> {
+                            return(
+                                <option value={currency.symbol}>{currency.symbol}{currency.label}</option>
+                            )
+                        })}
+                        
                     </select>
                     <img src={emptyCart}/>
                 </div>
@@ -40,4 +73,5 @@ class Navbar extends Component {
         );
     }
 }
-export default Navbar;
+// export default Navbar;
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

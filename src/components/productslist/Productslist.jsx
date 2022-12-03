@@ -6,17 +6,16 @@ export default class Productslist extends Component {
     constructor(props){
         super(props)
     }
-  render() {
+    render() {
     return (
         <div>
-            {console.log(this.props.productscategory?.products)}
             <h2>{this.props.productscategory?.name}</h2>
             <div className='container'>
                 <div className="products-wrapper">
                     {this.props.productscategory?.products?.map((product,i)=> {
                         return(
                             <div key={i}> 
-                                <Productcard product= {product}/>
+                                <Productcard product = {product}/>
                             </div> 
                         )
                     })} 
@@ -24,5 +23,5 @@ export default class Productslist extends Component {
             </div>
         </div>
     )
-  }
+    }
 }

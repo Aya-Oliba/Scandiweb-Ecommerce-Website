@@ -12,7 +12,6 @@ export const currencySlice = createSlice({
     reducers: {
         changeCurrency: (state, action)=> {
             state.currency = action.payload
-            console.log("from reducer", state.currency, action);
         }
     }
 })

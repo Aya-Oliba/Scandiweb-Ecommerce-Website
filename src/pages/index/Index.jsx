@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Productcard from '../../components/productcard/Productcard';
-// import { useQuery, gql } from '@apollo/client';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import Productslist from '../../components/productslist/Productslist';
 
@@ -48,7 +46,6 @@ class Indexpage extends Component {
     
 
     render() {
-        console.log(this.state.productsCategories[0])
         return (
             <div className='index-page'>
                 <Productslist  productscategory= {this.state.productsCategories[0]} />

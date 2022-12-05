@@ -1,10 +1,11 @@
 import './productcard.scss'
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import shoppingCart from '../../shoppingCart.png';
+import { Link } from 'react-router-dom';
 
-
+// passing store currency global value into component props 
 const mapStateToProps = (state) => {
-    console.log("from mapStateToProps", state)
     return {
         currency: state.currencyStore.currency
     }
@@ -44,14 +45,19 @@ class Productcard extends Component {
     render() {
         return (
             <div className='card'>
-                <div className="img-wrapper">
-                    <img src={this.props.product?.gallery[0]} alt="Product" />
-                </div>
+                {/* <Link to={`/${}`}></Link> */}
+                <Link to={`${this.props.product.id}`}>
+                    <div className="img-wrapper">
+                        <img src={this.props.product?.gallery[0]} alt="Product" />
+                        <div className="add-to-cart">
+                            <img src={shoppingCart} alt="shopping Bag" />
+                        </div>
+                    </div>
+                </Link>
                 <div className="description">
                     <p className='product-title'>{this.props.product?.name}</p>
                     <span className='product-price'>{this.state.priceDetails.currency.symbol}</span>
                     <span>{this.state.priceDetails.amount}</span>
-                    {console.log(this.state)}
                 </div>
             </div>
         );

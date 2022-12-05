@@ -1,3 +1,10 @@
+* {
+  margin: 0;
+}
+p,h3,h4,button {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

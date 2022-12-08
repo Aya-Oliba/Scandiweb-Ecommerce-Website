@@ -15,12 +15,12 @@ export default class ColorAttribute extends Component {
     render() {
         return (
         <div className='color-attribute'>
-            <h4>COLOR:</h4>
+            <h4 style={this.props.miniView === "true" ? {fontSize:"13px"} :{fontSize:"16px"}}>COLOR:</h4>
             <div className='content-wrapper'>
             {this.props.colors.map((color,i)=> {
                 return(
-                    <div className={ i == this.state.selectedIndex ? "selected" : "" } onClick={(e)=> this.handleClick(e,i) }>
-                        <p key={i}  style={{ backgroundColor: color.value}}></p>
+                    <div key={i} className={ i == this.state.selectedIndex ? "selected" : "" } style={this.props.miniView === "true" ? {width:"20px",height:"20px"}: {width:"40px",height:"40px"} } onClick={(e)=> this.handleClick(e,i) }>
+                        <p  style={{ backgroundColor: color.value}}></p>
                     </div>
                 )
             })}

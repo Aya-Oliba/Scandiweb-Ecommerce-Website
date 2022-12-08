@@ -45,7 +45,6 @@ class Productcard extends Component {
     render() {
         return (
             <div className='card'>
-                {/* <Link to={`/${}`}></Link> */}
                 <Link to={`${this.props.product.id}`}>
                     <div className="img-wrapper">
                         <img src={this.props.product?.gallery[0]} alt="Product" />

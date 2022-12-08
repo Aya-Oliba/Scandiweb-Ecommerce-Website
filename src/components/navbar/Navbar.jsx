@@ -6,6 +6,7 @@ import emptyCart from '../../Empty-Cart.png';
 import { connect } from 'react-redux';
 import { changeCurrency } from '../../redux/currencySlice';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import Bagcontent from '../bagcontent/Bagcontent';
 
 const mapStateToProps = (state) => {
     return {
@@ -40,11 +41,14 @@ class Navbar extends Component {
                     }
                 `,
             }).then((data) => this.setState({currenciesList :data?.data?.currencies}))
-        }
+    }
     
     handleChange(e){
         this.setState({selectedCurrency: e.target.value})
         this.props.changeCurrency(e.target.value)
+    }
+    handleBagClick= ()=> {
+        document.getElementById("drop-down").classList.toggle("unvisible");
     }
     render() {
         return (
@@ -62,12 +66,14 @@ class Navbar extends Component {
                     <select name="currencySelect" onChange={this.handleChange}>
                         {this.state.currenciesList.map((currency,i)=> {
                             return(
-                                <option value={currency.symbol}>{currency.symbol}{currency.label}</option>
+                                <option key={i} value={currency.symbol}>{currency.symbol}{currency.label}</option>
                             )
                         })}
-                        
                     </select>
-                    <img src={emptyCart}/>
+                    <img src={emptyCart} onClick={this.handleBagClick}/>
+                </div>
+                <div className='drop-down-bag unvisible' id='drop-down'>
+                    <Bagcontent/>
                 </div>
             </div>
         );

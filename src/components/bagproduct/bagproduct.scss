@@ -1,0 +1,39 @@
+.Bagproduct {
+    padding: 2% 3%;
+    .product-info {
+        text-align: left;
+        width: 50%;
+    }
+    .quantity {
+        text-align: left;
+        width: 50%;
+        display: flex;
+        .count {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-around;
+            width: 14%;
+            align-items: center;
+        }
+        .img{
+            width: 85%;
+        }
+    }
+    .btn {
+        width: 150px;
+        height: 52px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .secondary {
+        background-color: white;
+        color: black; 
+        border: 1px solid black;
+    }
+    .primary {
+        background-color: #5ECE7B;
+        color: white;
+        border: none;
+    }
+}

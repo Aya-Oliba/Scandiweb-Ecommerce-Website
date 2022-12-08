@@ -125,7 +125,7 @@ export class ProductDetails extends Component {
                 {
                     this.state.product?.gallery?.map((img,i)=> {
                         return(
-                            <img src={img} alt="image" onClick={(e,i)=>this.handleClick(e,i)}/>
+                            <img key={i} src={img} alt="image" onClick={(e,i)=>this.handleClick(e,i)}/>
                         )
                     })
                 }
@@ -141,10 +141,10 @@ export class ProductDetails extends Component {
                 <div>
                     {this.state?.product?.attributes?.map((attribute,i)=> {
                         if (attribute.id == "Color"){
-                            return <ColorAttribute key={i} colors={attribute.items} id={attribute.id} attributeValue={this.getValue}/>
+                            return <ColorAttribute key={i} colors={attribute.items} id={attribute.id} attributeValue={this.getValue} miniView="false"/>
                         }
                         else{
-                            return <CustomAttribute key={i} attribute={attribute} id={attribute.id} attributeValue={this.getValue}/>
+                            return <CustomAttribute key={i} attribute={attribute} id={attribute.id} attributeValue={this.getValue} miniView="false"/>
                         }
                     })}
                 </div>

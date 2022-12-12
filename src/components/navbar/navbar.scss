@@ -2,6 +2,7 @@
     padding: 10px 0;
     display: flex;
     align-items: center;
+    position: relative;
     ul {
         list-style: none;
         text-align: left;
@@ -30,6 +31,7 @@
         margin-right: 5rem;
         display: flex;
         align-items: center;
+        position: relative;
         p {
             margin-right: 8px;
         }
@@ -39,5 +41,42 @@
             margin-right: 1rem;
             width: 13px;
         }
+        img {
+            cursor: pointer;
+        }
+        .cart-span {
+            width: 20px;
+            height: 20px;
+            background-color: #1D1F22;
+            color: white;
+            border-radius: 50%;
+            position: absolute;
+            right: -13px;
+            bottom: 15px;
+            line-height: 1.2;
+        }
+    }
+    .drop-down-bag {
+        position: absolute;
+        z-index: 100;
+        width: 380px;
+        top: 65px;
+        right: 50px;
+        background-color: #FFFFFF;
+        max-height: 530px;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+    .hidden {
+        display: none;
+    }
+    #overlay {
+        background-color: rgba(57, 55, 72, 0.22);
+        width: 100%;
+        position: fixed;
+        height: 1000px;
+        top: 70px;
+        // display: none;
+        z-index: 999;
     }
 }

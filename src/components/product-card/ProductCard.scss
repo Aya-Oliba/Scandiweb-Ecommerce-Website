@@ -3,6 +3,24 @@
     padding: 1rem;
     width: 21.125rem;
     height: 23.75rem;
+    position: relative;
+    .card-overlay {
+        width: 100%;
+        height: 78%;
+        position: absolute;
+        background-color: #e5e4e4;
+        opacity: 0.3;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        & p {
+            font-size: 30px;
+            position: relative;
+            top: 30%;
+        }
+    }
     .img-wrapper {
         height: 80%;
         position: relative;
@@ -30,7 +48,7 @@
     .description {
         text-align: left;
     }
-    &:hover {
+    &:not(.unavailable):hover {
         background-color: #FFFFFF;
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
         .add-to-cart{

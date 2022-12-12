@@ -1,0 +1,40 @@
+.bag-content {
+    padding: 15px 20px;
+    .btn {
+        width: 150px;
+        height: 52px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .secondary {
+        background-color: white;
+        color: black; 
+        border: 1px solid black;
+    }
+    .primary {
+        background-color: #5ECE7B;
+        color: white;
+        border: none;
+    }
+    .order {
+        text-align: left;
+        margin-top: 2rem;
+    }
+    
+}
+.empty-cart-msg {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 50px;
+    button {
+        width: 150px;
+        height: 52px;
+        font-weight: 700;
+        cursor: pointer;
+        background-color: #5ECE7B;
+        color: white;
+        border: none;
+    }
+}
+

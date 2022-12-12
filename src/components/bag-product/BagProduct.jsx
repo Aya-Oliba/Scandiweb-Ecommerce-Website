@@ -123,7 +123,7 @@ export class BagProduct extends Component {
                     <div className="img" style={this.props.miniView === true ? {height:"190px",width:"77%"} : {height:"280px"}}>
                         <img src={this.props.product.product.gallery[this.state.productImgIndex]} style={{height:"100%",width:"100%"}} alt="product" />
                         {
-                            this.props.miniView !== true ? 
+                            this.props.miniView !== true && this.props.product.product.gallery.length > 1 ?
                             <div className="arrows">
                                 <div className="prev" onClick={this.handlePreviousImg}>
                                     <img src={Prev} alt="left-arrow" />

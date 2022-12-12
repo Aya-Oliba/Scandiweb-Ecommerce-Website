@@ -7,7 +7,8 @@ import Tech from './pages/tech/Tech';
 import ProductDetails from './pages/product-details/ProductDetails';
 import Bag from './pages/bag/Bag';
 import { Routes, Route } from 'react-router-dom';
-import React, { Component } from 'react';
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -18,9 +19,11 @@ function App() {
         <Route path='/' element={<Index/>}></Route>
         <Route path='/clothes' element={<Clothes/>}></Route>
         <Route path='/tech' element={<Tech/>}></Route> 
-        <Route path="/:id" element={<ProductDetails/>}></Route>  
+        <Route path="/products/:id" element={<ProductDetails/>}></Route>  
         <Route path="/bag" element={<Bag/>}></Route>
       </Routes> 
+      <ToastContainer autoClose={1500} position="top-right"/>
+
     </div>
   );
 }

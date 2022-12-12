@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Bagcontent } from '../../components/bagcontent/Bagcontent'
+import './bag.scss'
+import BagContent from '../../components/bag-content/BagContent'
 import { connect } from 'react-redux';
+import { addToCart } from '../../redux/CartSlice';
 
 const mapStateToProps = (state) => {
     return {
@@ -9,14 +11,19 @@ const mapStateToProps = (state) => {
     }
 };
 
+const mapDispatchToProps = { addToCart };
+
 export class Bag extends Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         return (
-        <div>
-            {/* cart */}
-            <Bagcontent/>
-        </div>
+            <div className='bag'>
+                <BagContent miniView={false}/>
+            </div>
         )
     }
 }
-export default connect(mapStateToProps)(Bag);
+export default connect(mapStateToProps, mapDispatchToProps)(Bag);

@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
-import './navbar.scss'
+import './Navbar.scss'
 import shoppingBag from '../../logo.png';
 import emptyCart from '../../Empty-Cart.png';
 import { connect } from 'react-redux';
-import { changeCurrency } from '../../redux/currencySlice';
+import { changeCurrency } from '../../redux/CurrencySlice';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
-import Bagcontent from '../bagcontent/Bagcontent';
-
-const mapStateToProps = (state) => {
-    return {
-        currency: state.currencyStore.currency
-    }
-};
+import BagContent from '../bag-content/BagContent';
+import {mapStateToProps} from '../../redux/connectors/CartStoreConnector'
 
 const mapDispatchToProps = { changeCurrency };
 
@@ -23,8 +18,8 @@ class Navbar extends Component {
             selectedCurrency: "$",
             currenciesList: []
         }
-        this.handleChange = this.handleChange.bind(this)
     }
+
     componentDidMount(){
         const client = new ApolloClient({
             uri: "http://localhost:4000/",
@@ -42,14 +37,32 @@ class Navbar extends Component {
                 `,
             }).then((data) => this.setState({currenciesList :data?.data?.currencies}))
     }
-    
-    handleChange(e){
+
+    /**
+     * update the currency within the component state as well as the currency store
+     * @param {{}} e click event of 
+     */
+    handleCurrencyChange = (e) => {
         this.setState({selectedCurrency: e.target.value})
         this.props.changeCurrency(e.target.value)
     }
+
+    /**
+     * show/hide the cart bag drop down as well as the overlay when the bag button is clicked
+     */
     handleBagClick= ()=> {
-        document.getElementById("drop-down").classList.toggle("unvisible");
+        document.getElementById("drop-down").classList.toggle("hidden");
+        document.getElementById("overlay").classList.toggle("hidden");
     }
+
+    /**
+     * show/hide the overlay div when the div is clicked
+     */
+    handleOverlayClick() {
+        document.getElementById("overlay").classList.toggle("hidden");
+        document.getElementById("drop-down").classList.toggle("hidden");
+    }
+
     render() {
         return (
             <div className='navbar'>
@@ -63,18 +76,24 @@ class Navbar extends Component {
                 </div>
                 <div className='right'>
                     <p>{this.state.selectedCurrency}</p>
-                    <select name="currencySelect" onChange={this.handleChange}>
-                        {this.state.currenciesList.map((currency,i)=> {
+                    <select name="currencySelect" onChange={this.handleCurrencyChange}>
+                        {this.state.currenciesList.map((currency, i)=> {
                             return(
                                 <option key={i} value={currency.symbol}>{currency.symbol}{currency.label}</option>
                             )
                         })}
                     </select>
                     <img src={emptyCart} onClick={this.handleBagClick}/>
+                    {
+                        Object.keys(this.props.cartProducts).length > 0 ?
+                        <span className='cart-span'>{this.props.totalCartProducts}</span> :
+                        null
+                    }
                 </div>
-                <div className='drop-down-bag unvisible' id='drop-down'>
-                    <Bagcontent/>
+                <div className='drop-down-bag hidden' id='drop-down'>
+                    <BagContent miniView={true}/>
                 </div>
+                <div id="overlay" className='hidden' onClick={this.handleOverlayClick}></div>
             </div>
         );
     }

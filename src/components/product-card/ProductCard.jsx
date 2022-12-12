@@ -1,4 +1,4 @@
-import './productcard.scss'
+import './ProductCard.scss'
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import shoppingCart from '../../shoppingCart.png';
@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
         currency: state.currencyStore.currency
     }
 };
-class Productcard extends Component {
+
+class ProductCard extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -44,8 +45,15 @@ class Productcard extends Component {
     
     render() {
         return (
-            <div className='card'>
-                <Link to={`${this.props.product.id}`}>
+            <div className={this.props.product.inStock ? 'card' :'card unavailable'}>
+                {
+                    !this.props.product.inStock ?
+                        <div className="card-overlay" >
+                            <p>OUT OF STOCK</p>
+                        </div>
+                    : null    
+                }
+                <Link to={`/products/${this.props.product.id}`}>
                     <div className="img-wrapper">
                         <img src={this.props.product?.gallery[0]} alt="Product" />
                         <div className="add-to-cart">
@@ -54,12 +62,12 @@ class Productcard extends Component {
                     </div>
                 </Link>
                 <div className="description">
-                    <p className='product-title'>{this.props.product?.name}</p>
-                    <span className='product-price'>{this.state.priceDetails.currency.symbol}</span>
-                    <span>{this.state.priceDetails.amount}</span>
+                    <p className='product-title' style={this.props.product.inStock ? null : {color:"#8D8F9A"}}>{this.props.product?.name}</p>
+                    <span className='product-price' style={this.props.product.inStock ? null : {color:"#8D8F9A", fontWeight:"bold"}}>{this.state.priceDetails.currency.symbol}</span>
+                    <span style={this.props.product.inStock ? null : {color:"#8D8F9A", fontWeight:"bold"}}>{this.state.priceDetails.amount}</span>
                 </div>
             </div>
         );
     }
 }
-export default connect(mapStateToProps)(Productcard);
+export default connect(mapStateToProps)(ProductCard);

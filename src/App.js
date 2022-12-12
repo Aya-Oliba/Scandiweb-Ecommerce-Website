@@ -4,7 +4,7 @@ import Navbar from './components/navbar/Navbar';
 import Index from './pages/index/Index';
 import Clothes from './pages/clothes/Clothes';
 import Tech from './pages/tech/Tech';
-import ProductDetails from './pages/productDetails/ProductDetails';
+import ProductDetails from './pages/product-details/ProductDetails';
 import Bag from './pages/bag/Bag';
 import { Routes, Route } from 'react-router-dom';
 import React, { Component } from 'react';

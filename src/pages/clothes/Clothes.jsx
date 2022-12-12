@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
-import Productslist from '../../components/productslist/Productslist';
+import ProductsList from '../../components/products-list/ProductsList';
 
 class clothes extends Component {
     constructor(){
@@ -10,42 +10,42 @@ class clothes extends Component {
         }
         
     }
-    componentDidMount(){
+
+    componentDidMount() {
         const client = new ApolloClient({
             uri: "http://localhost:4000/",
             cache: new InMemoryCache(),
         });
-        client
-            .query({
-                query: gql`
-                    query {
-                        categories {
-                            name
-                            products {
-                                id,
-                                name,
-                                inStock,
-                                description,
-                                brand,
-                                gallery,
-                                prices{
-                                    currency{
-                                        label
-                                        symbol
-                                    }
-                                    amount
+        client.query({
+            query: gql`
+                query {
+                    categories {
+                        name
+                        products {
+                            id,
+                            name,
+                            inStock,
+                            description,
+                            brand,
+                            gallery,
+                            prices{
+                                currency{
+                                    label
+                                    symbol
                                 }
+                                amount
                             }
                         }
                     }
-                `,
-            }).then((data) => this.setState({productsCategories: data?.data?.categories}))
-    
-        }
+                }
+            `,
+        }).then((data) => this.setState({productsCategories: data?.data?.categories}))
+    }
+
     render() {
         return (
             <div className='index-page'>
-                <Productslist  productscategory= {this.state.productsCategories[1]} />
+                <ProductsList productsCategory={this.state.productsCategories[1]} />
             </div>
         );
     }

@@ -13,7 +13,7 @@ const initialState = {
 function generateProductKey(product, attributesSelection) {
     let key = product.id;
     // if product has no attributes, then we can use its id as a key
-    if(product.attributes.length == 0) {
+    if(product.attributes.length === 0) {
         return key;
     }
 
@@ -50,8 +50,7 @@ export const cartSlice = createSlice({
             }
 
             // check if product should be removed from cart
-            if (state.cartProductsMap[key]['count'] == 0) {
-                console.log('hamadadaaaa')
+            if (state.cartProductsMap[key]['count'] === 0) {
                 delete state.cartProductsMap[key];
             }
         } 

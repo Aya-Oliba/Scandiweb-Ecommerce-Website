@@ -72,7 +72,7 @@ export class ProductDetails extends Component {
      * @param {{}} e add to cart button click event
      */
     handleAddToCart = (e) => {
-        if(this.state.product.attributes.length == Object.keys(this.state.attributesSelection).length){
+        if(this.state.product.attributes.length === Object.keys(this.state.attributesSelection).length){
             this.props.addToCart({
                 product: this.state.product,
                 attributesSelection: this.state.attributesSelection
@@ -151,13 +151,13 @@ export class ProductDetails extends Component {
                     {
                         this.state.product?.gallery?.map((img,i)=> {
                             return(
-                                <img key={i} src={img} alt="image" onClick={(e)=>this.handleImageSelection(e)}/>
+                                <img key={i} src={img} alt="product" onClick={(e)=>this.handleImageSelection(e)}/>
                             )
                         })
                     }
                 </div>
                 <div className='product-selected-img'>
-                    <img src={this.state.selectedImg} alt="selected image" />
+                    <img src={this.state.selectedImg} alt="selected product" />
                 </div>
                 <div className="product-description">
                     <div className="title">
